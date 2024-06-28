@@ -9,5 +9,12 @@
     },
     "postCreateCommand": {
         "zsh_default": "echo zsh >> ~/.bashrc"
+    },
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "humao.rest-client"
+            ]
+        }
     }
 }

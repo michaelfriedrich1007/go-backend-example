@@ -1,0 +1,11 @@
+services:
+  compartilha-tech:
+    container_name: compartilha-tech
+    build:
+      context: compartilha-tech
+      dockerfile: Dockerfile
+      target: development
+    volumes:
+      - $PWD/compartilha-tech:/app
+    ports:
+      - 3333:3333

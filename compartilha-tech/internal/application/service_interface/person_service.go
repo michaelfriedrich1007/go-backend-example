@@ -6,7 +6,7 @@ import (
 )
 
 type PersonService interface {
-	Insert(data dto.CreatePerson) (entities.Person, error)
+	Insert(data dto.CreatePerson) (*entities.Person, error)
 	List() ([]*entities.Person, error)
 	GetById(ID string) (*entities.Person, error)
 }

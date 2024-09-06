@@ -1,7 +1,7 @@
 package dto
 
 type CreatePerson struct {
-	Name   string
-	Age    int
-	Active *bool
+	Name   string `json:"name"`
+	Age    int    `json:"age"`
+	Active *bool  `json:"active"`
 }

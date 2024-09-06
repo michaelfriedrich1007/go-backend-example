@@ -17,7 +17,7 @@ func NewPersonService() service_interface.PersonService {
 	}
 }
 
-func (s *PersonService) Insert(data dto.CreatePerson) (entities.Person, error) {
+func (s *PersonService) Insert(data dto.CreatePerson) (*entities.Person, error) {
 	p := entities.NewPerson()
 	p.Name = data.Name
 	p.Age = data.Age
@@ -26,7 +26,9 @@ func (s *PersonService) Insert(data dto.CreatePerson) (entities.Person, error) {
 		p.Active = *data.Active
 	}
 
-	return *p, nil
+	s.PersonRepository = append(s.PersonRepository, *p)
+
+	return p, nil
 
 }
 

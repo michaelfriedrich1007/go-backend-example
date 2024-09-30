@@ -32,12 +32,53 @@ func (s *PersonService) Insert(data dto.CreatePerson) (*entities.Person, error) 
 
 }
 
-func (s *PersonService) List() ([]*entities.Person, error) {
-	fmt.Println("List")
-	return nil, nil
+func (s *PersonService) List() ([]entities.Person, error) {
+	return s.PersonRepository, nil
 }
 
 func (s *PersonService) GetById(ID string) (*entities.Person, error) {
-	fmt.Println("GetById")
+	person := new(entities.Person)
+
+	for _, p := range s.PersonRepository {
+		if p.ID == ID {
+			person = &p
+			return person, nil
+		}
+	}
+
 	return nil, nil
+}
+
+func (s *PersonService) Update(ID string, data dto.UpdatePerson) (*entities.Person, error) {
+	for i, p := range s.PersonRepository {
+		if p.ID == ID {
+			if data.Name != nil {
+				p.Name = *data.Name
+			}
+			if data.Age != nil {
+				p.Age = *data.Age
+			}
+			if data.Active != nil {
+				p.Active = *data.Active
+			}
+
+			s.PersonRepository[i] = p
+
+			return &p, nil
+		}
+	}
+
+	return nil, fmt.Errorf("not fount")
+}
+
+func (s *PersonService) Delete(ID string) error {
+	for i, p := range s.PersonRepository {
+		if p.ID == ID {
+			s.PersonRepository = append(s.PersonRepository[:i], s.PersonRepository[i+1:]...)
+			return nil
+		}
+	}
+
+	return fmt.Errorf("not fount")
+
 }

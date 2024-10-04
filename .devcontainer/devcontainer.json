@@ -8,6 +8,7 @@
         "ghcr.io/devcontainers/features/docker-in-docker:2": {}
     },
     "postCreateCommand": {
+        "sqlc": "go install github.com/sqlc-dev/sqlc/cmd/sqlc@latest",
         "zsh_default": "echo zsh >> ~/.bashrc"
     },
     "customizations": {

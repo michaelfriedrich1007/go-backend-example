@@ -12,22 +12,23 @@ POST {{host}}/person
 
 {
 	"name": "Doe",
-	"age": 30
+	"age": 30,
+	"active": false
 }
 
 ###
 GET {{host}}/person
 
 ###
-GET {{host}}/person/f6b3af83-2c83-4dde-a3f7-4b7feb8a146a
+GET {{host}}/person/78e83872-7c0c-4a3b-ab11-3b6f3a19cadf
 
 ###
-PATCH {{host}}/person/600b5214-c22b-4e58-952d-763cfb545c67
+PATCH {{host}}/person/78e83872-7c0c-4a3b-ab11-3b6f3a19cadf
 
 {
 	"age": 40
 }
 
 ###
-DELETE {{host}}/person/5fccfbe3-457a-4f4a-a443-8328966ef0d9
+DELETE {{host}}/person/1885f090-e082-4587-91b0-6a475c8e569a
 

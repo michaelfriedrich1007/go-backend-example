@@ -4,5 +4,6 @@ CREATE TABLE person(
     age integer NULL,
     active boolean NOT NULL,
     created_at timestamp NOT NULL,
-    updated_at timestamp NOT NULL
+    updated_at timestamp NOT NULL,
+    deleted_at timestamp NULL
 );

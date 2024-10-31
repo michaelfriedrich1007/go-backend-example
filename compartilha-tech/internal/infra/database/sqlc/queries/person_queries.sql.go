@@ -12,7 +12,9 @@ import (
 )
 
 const deletePerson = `-- name: DeletePerson :exec
-DELETE FROM person WHERE id = $1
+UPDATE person SET
+deleted_at = NOW()
+WHERE id = $1
 `
 
 func (q *Queries) DeletePerson(ctx context.Context, id string) error {
@@ -21,7 +23,7 @@ func (q *Queries) DeletePerson(ctx context.Context, id string) error {
 }
 
 const getPersonById = `-- name: GetPersonById :one
-SELECT id, name, age, active, created_at, updated_at FROM person WHERE id = $1
+SELECT id, name, age, active, created_at, updated_at, deleted_at FROM person WHERE id = $1 AND deleted_at IS NULL
 `
 
 func (q *Queries) GetPersonById(ctx context.Context, id string) (Person, error) {
@@ -34,12 +36,13 @@ func (q *Queries) GetPersonById(ctx context.Context, id string) (Person, error) 
 		&i.Active,
 		&i.CreatedAt,
 		&i.UpdatedAt,
+		&i.DeletedAt,
 	)
 	return i, err
 }
 
 const getPersons = `-- name: GetPersons :many
-SELECT id, name, age, active, created_at, updated_at FROM person
+SELECT id, name, age, active, created_at, updated_at, deleted_at FROM person WHERE deleted_at IS NULL
 `
 
 func (q *Queries) GetPersons(ctx context.Context) ([]Person, error) {
@@ -58,6 +61,7 @@ func (q *Queries) GetPersons(ctx context.Context) ([]Person, error) {
 			&i.Active,
 			&i.CreatedAt,
 			&i.UpdatedAt,
+			&i.DeletedAt,
 		); err != nil {
 			return nil, err
 		}

@@ -16,4 +16,5 @@ type Person struct {
 	Active    bool
 	CreatedAt time.Time
 	UpdatedAt time.Time
+	DeletedAt sql.NullTime
 }

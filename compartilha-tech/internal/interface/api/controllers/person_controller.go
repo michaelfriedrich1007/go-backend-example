@@ -108,7 +108,11 @@ func (c *PersonController) handleDelete(w http.ResponseWriter, r *http.Request) 
 		return
 	}
 
-	responseJson(w, http.StatusNoContent, nil)
+	response := map[string]string{
+		"message": "Pessoa deletada com sucesso",
+	}
+
+	responseJson(w, http.StatusOK, response)
 }
 
 func responseJson(w http.ResponseWriter, status int, v any) {
